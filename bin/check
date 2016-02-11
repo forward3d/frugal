@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'benchmark'
+require_relative '../lib/frugal'
+
+options = {}
+OptionParser.new do |opts|
+  opts.on('-d', '--instance_id INSTANCE_ID', 'EC2 Instance ID') do |id|
+    options[:instance_id] = id.strip.downcase
+  end
+  opts.on('-i', '--interval SECONDS', 'Number of seconds between each check') do |t|
+    options[:interval] = t.strip.to_i
+  end
+  opts.on('-t', '--threshold MINUTES', 'Number of minutes to pass before setting instance protection to false') do |t|
+    options[:threshold] = t.strip.to_i
+  end
+  opts.on('-a', '--aws-access-key ACCESS_KEY', 'AWS Access Key') do |a|
+    options[:aws_access_key] = a.strip
+  end
+  opts.on('-s', '--aws-secret-key SECRET_KEY', 'AWS Secret Key') do |s|
+    options[:aws_secret_key] = s.strip
+  end
+  opts.on('-r', '--region REGION', 'AWS Region') do |r|
+    options[:region] = r.strip.downcase
+  end
+  opts.on('-v', '--verbose', 'Make the logs louder') do
+    options[:verbose] = true
+  end
+end.parse!
+
+Frugal::Check.new(options).run!
