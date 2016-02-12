@@ -10,6 +10,35 @@ It currently only has one mode of operation...
 
 It asks the AWS API for the launch time of the instance, compares that to the current time every interval it will call the API again to either set the protection to on or off depending on the threshold set.
 
+## IAM Policy
+
+This is an example IAM policy that has all the actions required for Frugal to run. Remember to restrict the `Resource` to what you actually need in your account.
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:DescribeInstances"
+                ],
+                "Resource": [
+                    "*"
+                ]
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "autoscaling:DescribeAutoScalingInstances",
+                    "autoscaling:SetInstanceProtection"
+                ],
+                "Resource": [
+                    "*"
+                ]
+            }
+        ]
+    }
+
 ## How to run the Docker container
 
 The absolute minimum required to run the container...
