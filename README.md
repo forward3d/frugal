@@ -12,7 +12,13 @@ It asks the AWS API for the launch time of the instance, compares that to the cu
 
 ## How to run the Docker container
 
-TODO
+The absolute minimum required to run the container...
+
+`docker run forward3d/frugal -d i-16acdaac -r us-west-2 -a "AK....." -s "cp2..."``
+
+If you run this it will output all possible arguments to the container...
+
+`docker run -it forward3d/frugal --help`
 
 ## How to run the code (not inside the container)
 
