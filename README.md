@@ -18,13 +18,13 @@ TODO
 
 The `check` executable takes several arguments...
 
-`-d INSTANCE_ID` the ID of the EC2 instance we want to monitor
-`-i INTERVAL` how often in seconds we should check (defaults to 60)
-`-t THRESHOLD` how many minutes must pass before turning the instance protection off
-`-a AWS_ACCESS_KEY` AWS access key that has enough access to the API to see Autoscaling Groups and EC2 instances
-`-s AWS_SECRET_KEY` AWS secret key
-`-r AWS_REGION` AWS region that the instance resides in
-`-v` turn on debug logging
+* `-d INSTANCE_ID` the ID of the EC2 instance we want to monitor
+* `-i INTERVAL` how often in seconds we should check (defaults to 60)
+* `-t THRESHOLD` how many minutes must pass before turning the instance protection off
+* `-a AWS_ACCESS_KEY` AWS access key that has enough access to the API to see Autoscaling Groups and EC2 instances
+* `-s AWS_SECRET_KEY` AWS secret key
+* `-r AWS_REGION` AWS region that the instance resides in
+* `-v` turn on debug logging
 
 Example...
 
