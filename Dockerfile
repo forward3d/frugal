@@ -6,7 +6,7 @@ MAINTAINER developers@forward3d.com
 WORKDIR /opt/frugal
 COPY Gemfile /opt/frugal/Gemfile
 COPY Gemfile.lock /opt/frugal/Gemfile.lock
-RUN /opt/ruby/bin/bundle install
+RUN /usr/local/bundle/bin/bundle install
 COPY . /opt/frugal
 
 # Entrypoint is to run the frugal binary
