@@ -61,7 +61,7 @@ module Frugal
         minutes_since_launch = TimeDifference.between(instance.launch_time, Time.now.utc).in_minutes
         logger.debug "Instance was started at #{instance.launch_time}, #{minutes_since_launch}m ago"
 
-        if minutes_since_launch >= @threshold
+        if minutes_since_launch % 60 >= @threshold
           logger.info "Launch time ago #{minutes_since_launch} >= #{@threshold}"
           Frugal::Protection.disable!(@instance_id)
         else
