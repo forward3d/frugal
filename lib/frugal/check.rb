@@ -2,7 +2,7 @@ module Frugal
   class Check
     include Logging
 
-    def initialize(instance_id:, interval: 60, threshold: 55, verbose: false, region: 'us-east-1', aws_access_key:, aws_secret_key:)
+    def initialize(instance_id:, interval: 60, threshold: 55, verbose: false, region: 'us-east-1', aws_access_key:, aws_secret_key:, aws_session_token: nil)
       logger.info 'Frugal Starting!'
       Frugal::Logging.set_debug_level if verbose
 
@@ -27,6 +27,9 @@ module Frugal
       @aws_secret_key = aws_secret_key
       logger.debug "- aws_secret_key: #{aws_secret_key}"
 
+      @aws_session_token = aws_session_token
+      logger.debug "- aws_session_token: #{aws_session_token}"
+
       # validations
 
       if @instance_id.nil?
@@ -44,7 +47,7 @@ module Frugal
         exit 1
       end
 
-      Aws.config.update(region: @region, credentials: Aws::Credentials.new(@aws_access_key, @aws_secret_key))
+      Aws.config.update(region: @region, credentials: Aws::Credentials.new(@aws_access_key, @aws_secret_key, @aws_session_token))
     end
 
     def run!

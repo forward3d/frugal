@@ -43,6 +43,7 @@ if options[:aws_access_key].nil?
 
   options[:aws_access_key] = credentials['AccessKeyId']
   options[:aws_secret_key] = credentials['SecretAccessKey']
+  options[:aws_session_token] = credentials['Token']
 end
 
 Frugal::Check.new(options).run!
