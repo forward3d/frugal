@@ -28,4 +28,21 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+
+if options[:instance_id].nil?
+  options[:instance_id] = HTTParty.get('http://169.254.169.254/latest/meta-data/instance-id/').parsed_response
+end
+
+if options[:region].nil?
+  options[:region] = JSON.parse(HTTParty.get('http://169.254.169.254/latest/dynamic/instance-identity/document').parsed_response)['region']
+end
+
+if options[:aws_access_key].nil?
+  role = HTTParty.get('http://169.254.169.254/latest/meta-data/iam/security-credentials/').parsed_response
+  credentials = JSON.parse(HTTParty.get("http://169.254.169.254/latest/meta-data/iam/security-credentials/#{role}").parsed_response)
+
+  options[:aws_access_key] = credentials['AccessKeyId']
+  options[:aws_secret_key] = credentials['SecretAccessKey']
+end
+
 Frugal::Check.new(options).run!
